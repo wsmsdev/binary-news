@@ -2,3 +2,4 @@ python-dotenv
 voyageai
 qdrant-client
 newsapi-python
+streamlit

@@ -26,6 +26,7 @@ sparse_embedder = SparseTextEmbedding(model_name="prithivida/Splade_PP_en_v1")
 
 
 def load_chunks(input_json_path, limit=None):
+    """ Loads the articles from the json file and returns a list of articles """
     articles = []
     with open(input_json_path, "r") as f:
         count = 0
@@ -46,6 +47,7 @@ def load_chunks(input_json_path, limit=None):
     return articles
 
 def generate_dense_embeddings(articles, voyage_client):
+    """ Generates dense embeddings for the articles """
     logger.info("Generating dense embeddings")
     dense_embeddings = []
     for i, article in enumerate(articles):
@@ -56,6 +58,7 @@ def generate_dense_embeddings(articles, voyage_client):
     return dense_embeddings
 
 def create_sparse_embeddings(articles, sparse_embedder):
+    """ Creates sparse embeddings for the articles """
     logger.info("Creating sparse embeddings")
     sparse_embeddings = []
     for i, article in enumerate(articles):
@@ -66,6 +69,7 @@ def create_sparse_embeddings(articles, sparse_embedder):
     return sparse_embeddings
 
 def setup_qdrant_collection(qdrant_client, collection_name):
+    """ Sets up the Qdrant collection """
     logger.info(f"Setting up Qdrant collection {collection_name}")
     
     # Check if collection already exists
@@ -100,6 +104,7 @@ def setup_qdrant_collection(qdrant_client, collection_name):
 
 
 def prepare_and_upsert_points(articles, dense_embeddings, sparse_embeddings, qdrant_client, collection_name):
+    """ Prepares and upserts the points to the Qdrant collection """
     logger.info("Preparing and upserting points")
     points = []
     for i, (article, dense_embedding, sparse_embedding) in enumerate(zip(articles, dense_embeddings, sparse_embeddings)):
@@ -137,6 +142,7 @@ def prepare_and_upsert_points(articles, dense_embeddings, sparse_embeddings, qdr
         raise e
 
 def update_collection_settings(qdrant_client, collection_name):
+    """ Updates the collection settings """
     logger.info(f"Updating collection settings for {collection_name}")
     qdrant_client.update_collection(
         collection_name=collection_name,
@@ -147,6 +153,7 @@ def update_collection_settings(qdrant_client, collection_name):
     logger.info(f"Collection {collection_name} settings updated with indexing_threshold=20000")
         
 def main():
+    """ Main function to load the articles, generate embeddings, and upsert them to Qdrant """
     # Load only the first 1000 entries
     articles = load_chunks("./data/news_dataset_v3.json", limit=1000)
     
