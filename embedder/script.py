@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 # Get API key from environment variables
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 VOYAGE_API_KEY = os.getenv("VOYAGE_API_KEY")
