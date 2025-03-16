@@ -18,12 +18,6 @@ def create_app():
     
     This application uses advanced retrieval techniques to find the most relevant news articles based on your query:
     
-    - **Hybrid Search**: Combines dense and sparse vector search for better results
-    - **Dense Embeddings**: Generated using VoyageAI's multilingual model
-    - **Sparse Embeddings**: Uses SPLADE for lexical search capabilities
-    - **Binary Quantization**: Optimizes vector storage and improves search performance
-    - **Rank Fusion**: Merges results using RRF (Reciprocal Rank Fusion)
-    
     Simply enter your search query below to find relevant news articles.
     """)
     
